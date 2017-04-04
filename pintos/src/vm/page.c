@@ -145,10 +145,13 @@ page_out (struct page *p)
      dirty bit, to prevent a race with the process dirtying the
      page. */
 
-/* add code here */
+  /* Collin - Proj3 */
+  pagedir_clear_page(p->thread->pagedir, p->addr);
 
   /* Has the frame been modified? */
-
+  dirty = pagedir_is_dirty(p->thread->pagedir, p->addr);
+  /* End proj3 */
+   
 /* add code here */
 
   /* Write frame contents to disk if necessary. */
