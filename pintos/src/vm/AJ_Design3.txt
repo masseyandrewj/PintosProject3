@@ -40,6 +40,8 @@ The code found in threads/vaddr.h supports these assumptions by declaring what P
 >> A2: When two user processes both need a new frame at the same time,
 >> how are races avoided?
 
+- When a process goes to do a Page In, then the Page->Frame is locked to prevent other pages from being able to call for a Frame. Then, that Frame is loaded into the Page Table and, upon success, the Page->Frame->Lock is released and allowed to go onto the next Page.
+
 		       PAGING TO AND FROM DISK
 		       =======================
 
@@ -47,6 +49,12 @@ The code found in threads/vaddr.h supports these assumptions by declaring what P
 
 >> B1: When a frame is required but none is free, some frame must be
 >> evicted.  Describe the algorithm used to choose a frame to evict.
+
+- The current structure for Frame Eviction is as follows:
+1) A Frame is chosen using the Page Replacement algorithm.
+2) Make sure that all references of said Frame are removed from any (and all) Pages that could reference it.
+3) And lastly, if necessary, we can write the page to either the File System or to the Swap function.
+4) Voila! The Frame can now be used for a different Page if desired.
 
 >> B2: Explain your heuristic for deciding whether a page fault for an
 >> invalid virtual address should cause the stack to be extended into
@@ -91,14 +99,23 @@ the quarter.
 >> In your opinion, was this assignment, or any one of the three problems
 >> in it, too easy or too hard?  Did it take too long or too little time?
 
+- I was really confused by all of this. I have tried to make sure that I understand everything in the previous projects, but this one just kept throwing me for loops. Maybe it was just the lack of sleep/Spring Break that broke me....
+
 >> Did you find that working on a particular part of the assignment gave
 >> you greater insight into some aspect of OS design?
+
+- ???????????????????
 
 >> Is there some particular fact or hint we should give students in
 >> future quarters to help them solve the problems?  Conversely, did you
 >> find any of our guidance to be misleading?
 
+- Start on this early. It seems super easy, but don't delay until the last few days.
+
 >> Do you have any suggestions for the TAs to more effectively assist
 >> students, either for future quarters or the remaining projects?
 
+- Not at this time.
+
 >> Any other comments?
+- Not at this time.
