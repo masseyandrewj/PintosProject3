@@ -29,6 +29,12 @@ Collin Vossman
 >> A1: In a few paragraphs, describe the existing code for locating the
 >> frame, if any, that contains the data of a given page.
 
+- From what I have understood throughout reading the Project Specs and the A.6 Appendix over virtual memory and how it relates to Physical Memory, it appears that what happens is that PintOS has created a set amount of space (for this example we will say 32 bits) and makes sure to mark off a portion of that (about 20 bits) for the Frame Number and the other 12 bits for the Frame Offset.
+
+The Frame Number is used to keep track of the various Pages that are stored and being used by that Frame. When these pages are being mapped to the Physical Memory, the Frame uses a 1-to-1 basis and makes sure to build off of the PHYS_BASE. If the Physical Memory is using 0x1234, then the Frame's Virtual Address for that can be located at PHYS_BASE + 0x1234.
+
+The code found in threads/vaddr.h supports these assumptions by declaring what PHYS_BASE is and then checking to see if the vaddr is greater than or less than that PHYS_BASE.
+
 ---- SYNCHRONIZATION ----
 
 >> A2: When two user processes both need a new frame at the same time,
