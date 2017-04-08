@@ -1,12 +1,4 @@
-Only in Pintos3/PintosProject3/pintos/src/threads: build
-Only in Pintos3/PintosProject3/pintos/src/userprog: build
-Only in Pintos3_G/cis520_project_3/pintos/src/userprog: Design2.txt
-diff -r Pintos3/PintosProject3/pintos/src/userprog/Make.vars Pintos3_G/cis520_project_3/pintos/src/userprog/Make.vars
-7c7
-< SIMULATOR = --bochs
----
-> SIMULATOR = --qemu
-diff -r Pintos3/PintosProject3/pintos/src/userprog/syscall.c Pintos3_G/cis520_project_3/pintos/src/userprog/syscall.c
+Pintos3/PintosProject3/pintos/src/userprog/syscall.c
 507c507,513
 < /* add code here */
 ---
@@ -17,20 +9,21 @@ diff -r Pintos3/PintosProject3/pintos/src/userprog/syscall.c Pintos3_G/cis520_pr
 >     page_deallocate(m->base + PGSIZE * i);
 >   }
 >   free(m);
+
 563c569
 < /* add code here */
 ---
 >   struct mapping *m = malloc (sizeof *m);
+
 564a571,572
 >   m = lookup_mapping(mapping);
 >   unmap(m);
-Only in Pintos3/PintosProject3/pintos/src/vm: AJ_Design3.txt
-Only in Pintos3/PintosProject3/pintos/src/vm: build
-Only in Pintos3/PintosProject3/pintos/src/vm: Lance_Design3.txt
-diff -r Pintos3/PintosProject3/pintos/src/vm/page.c Pintos3_G/cis520_project_3/pintos/src/vm/page.c
+
+Pintos3/PintosProject3/pintos/src/vm/page.ct_3/pintos/src/vm/page.c
 14a15,16
 > #define PUSHA_SIZE 32
 > 
+
 54,56c56,60
 < 
 < /* add code */
@@ -41,13 +34,16 @@ diff -r Pintos3/PintosProject3/pintos/src/vm/page.c Pintos3_G/cis520_project_3/p
 >       {
 >         return page_allocate ((void *) address, false);
 >       }
+
 75c79
 <       swap_in (p); 
 ---
 >       swap_in (p);
+
 147,148d150
 < 
 <   /* Collin - Proj3 */
+
 153,155c155,158
 <   /* End proj3 */
 <    
@@ -57,6 +53,7 @@ diff -r Pintos3/PintosProject3/pintos/src/vm/page.c Pintos3_G/cis520_project_3/p
 >   /* Write dirty page back to swap. */
 >   if(p->file == NULL)
 >       ok = swap_out(p);
+
 157a161,169
 >   else if (p->file != NULL)
 >     {
@@ -67,13 +64,15 @@ diff -r Pintos3/PintosProject3/pintos/src/vm/page.c Pintos3_G/cis520_project_3/p
 >       else
 >         ok = swap_out(p);
 >     }
+
 159c171,173
 < /* add code here */
 ---
 >   // No longer in a frame
 >   if(ok)
 >     p->frame = NULL;
-diff -r Pintos3/PintosProject3/pintos/src/vm/swap.c Pintos3_G/cis520_project_3/pintos/src/vm/swap.c
+
+Pintos3/PintosProject3/pintos/src/vm/swap.c
 77c77,79
 < /* add code here */ 
 ---
