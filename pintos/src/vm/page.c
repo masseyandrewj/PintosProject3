@@ -51,8 +51,13 @@ page_for_addr (const void *address)
         return hash_entry (e, struct page, hash_elem);
 
       /* No page.  Expand stack? */
+      /* Lance Pettay - 4/9/17 - Code for stack expansion */
 
-/* add code */
+      struct thread *t = thread_current();
+      
+      if(address >= t->user_esp - 32)
+      	if(address >= PHYS_BASE - STACK_MAX)
+      	  return page_allocate((void *) address, false);
 
     }
   return NULL;
