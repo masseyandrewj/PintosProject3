@@ -23,3 +23,9 @@ First, we detected whether PUSHA was the most recent instruction on the stack by
 was greater than or equal to the current thread's esp value minus the size of PUSHA (32 bytes).
 Next, we check if the address is greater than the size of the stack (PHYS_BASE - STACK_MAX). If
 both of these are true, then new space is allocated for the page via page_allocate().
+////////////////////////////////////////////  END OF STACK GROWTH ////////////////////////////////////////////////
+
+//////////////////////////////////////////// PAGE SWAPPING ////////////////////////////////////////////////
+
+page.c: 
+//////////////////////////////////////////// END OF PAGE SWAPPING ////////////////////////////////////////////////
