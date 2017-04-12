@@ -504,14 +504,13 @@ lookup_mapping (int handle)
 static void
 unmap (struct mapping *m) 
 {
-  while((m->page_cnt-1) > 0)
-  {
-    page_deallocate(m->base + PGSIZE * m->page_cnt);
-    m->page_cnt--; 
-  }
+ list_remove(&m->elem);
  
-  list_remove(&m->elem);
-  free(m);
+ for(int i = 0; i < m->page_cnt; i++)
+ {
+  page_deallocate(m->base + PGSIZE * i); 
+ }
+ free(m);
 }
  
 /* Mmap system call. */
