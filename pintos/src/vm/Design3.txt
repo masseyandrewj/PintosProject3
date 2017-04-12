@@ -94,7 +94,9 @@ both of these are true, then new space is allocated for the page via page_alloca
 >> memory subsystem.  Explain how the page fault and eviction
 >> processes differ between swap pages and other pages.
 
-- ???????????????????????????????????
+- We allocate pages for a file through page_allocate, allocating pages as needed by a file.
+The difference between swap pages and other pages is whether we use swap_in() or file_read_at()
+when loading pages into a frame during the page eviction process.
 
 >> C3: Explain how you determine whether a new file mapping overlaps
 >> any existing segment.
