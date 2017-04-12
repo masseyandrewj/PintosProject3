@@ -155,14 +155,25 @@ page_out (struct page *p)
 
   /* Has the frame been modified? */
   dirty = pagedir_is_dirty(p->thread->pagedir, p->addr);
-  /* End proj3 */
-   
-/* add code here */
-
-  /* Write frame contents to disk if necessary. */
-
-/* add code here */
-
+  
+  /* Swap out page if there is no file. */
+  if(p->file == NULL) {
+    ok = swap_out(p);  // TRUE if successfully swaps the page out
+  }
+  else {
+    if(!dirty) {
+      ok = true;
+    }
+    /* Write frame contents to disk if necessary. */
+    else if(!p->private) { 
+      ok = (file_write_at(p->file, p->frame->base, p->file_bytes, p->file_offset) == p->file_bytes);  
+      //TRUE if number of bytes written = the bytes of the file
+    }
+    else {
+      ok = swap_out(p);  
+    }
+  }
+  /* End Proj3 */
   return ok;
 }
 
