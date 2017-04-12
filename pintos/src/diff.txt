@@ -1,23 +1,23 @@
 Pintos3/PintosProject3/pintos/src/userprog/syscall.c
-507c507,513
-< /* add code here */
----
->   list_remove(&m->elem);
-> 
->   for (int i = 0; i < m->page_cnt; i++)
->   {
->     page_deallocate(m->base + PGSIZE * i);
->   }
->   free(m);
-
-563c569
-< /* add code here */
----
->   struct mapping *m = malloc (sizeof *m);
-
-564a571,572
->   m = lookup_mapping(mapping);
->   unmap(m);
+#507c507,513
+#< /* add code here */
+#---
+#>   list_remove(&m->elem);
+#> 
+#>   for (int i = 0; i < m->page_cnt; i++)
+#>   {
+#>     page_deallocate(m->base + PGSIZE * i);
+#>   }
+#>   free(m);
+#
+#563c569
+#< /* add code here */
+#---
+#>   struct mapping *m = malloc (sizeof *m);
+#
+#564a571,572
+#>   m = lookup_mapping(mapping);
+#>   unmap(m);
 
 Pintos3/PintosProject3/pintos/src/vm/page.ct_3/pintos/src/vm/page.c
 #14a15,16
