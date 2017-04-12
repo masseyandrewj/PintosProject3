@@ -40,37 +40,37 @@ Pintos3/PintosProject3/pintos/src/vm/page.ct_3/pintos/src/vm/page.c
 #---
 #>       swap_in (p);
 
-147,148d150
-< 
-<   /* Collin - Proj3 */
+#147,148d150
+#< 
+#<   /* Collin - Proj3 */
 
-153,155c155,158
-<   /* End proj3 */
-<    
-< /* add code here */
----
-> 
->   /* Write dirty page back to swap. */
->   if(p->file == NULL)
->       ok = swap_out(p);
+#153,155c155,158
+#<   /* End proj3 */
+#<    
+#< /* add code here */
+#---
+#> 
+#>   /* Write dirty page back to swap. */
+#>   if(p->file == NULL)
+#>       ok = swap_out(p);
 
-157a161,169
->   else if (p->file != NULL)
->     {
->       if(!dirty)
->         ok = true;
->       else if (!p->private)
->         ok = file_write_at(p->file, p->frame->base, p->file_bytes, p->file_offset) == p->file_bytes;
->       else
->         ok = swap_out(p);
->     }
+#157a161,169
+#>   else if (p->file != NULL)
+#>     {
+#>       if(!dirty)
+#>         ok = true;
+#>       else if (!p->private)
+#>         ok = file_write_at(p->file, p->frame->base, p->file_bytes, p->file_offset) == p->file_bytes;
+#>       else
+#>         ok = swap_out(p);
+#>     }
 
-159c171,173
-< /* add code here */
----
->   // No longer in a frame
->   if(ok)
->     p->frame = NULL;
+#159c171,173
+#< /* add code here */
+#---
+#>   // No longer in a frame
+#>   if(ok)
+#>     p->frame = NULL;
 
 Pintos3/PintosProject3/pintos/src/vm/swap.c
 #77c77,79
