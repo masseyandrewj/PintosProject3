@@ -35,10 +35,10 @@ Pintos3/PintosProject3/pintos/src/vm/page.ct_3/pintos/src/vm/page.c
 #>         return page_allocate ((void *) address, false);
 #>       }
 
-75c79
-<       swap_in (p); 
----
->       swap_in (p);
+#75c79
+#<       swap_in (p); 
+#---
+#>       swap_in (p);
 
 147,148d150
 < 
