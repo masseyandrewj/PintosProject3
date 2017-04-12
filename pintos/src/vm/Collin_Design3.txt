@@ -1,8 +1,8 @@
                +---------------------------+
        	       |         CIS 520           |
-		           | PROJECT 3: Virtual Memory |
-		           |     DESIGN DOCUMENT       |
-		           +---------------------------+
+	       | PROJECT 3: Virtual Memory |
+	       |     DESIGN DOCUMENT       |
+	       +---------------------------+
 
 ---- GROUP ----
 
@@ -47,9 +47,9 @@ to see if the vaddr is greater than or less than that PHYS_BASE.
 >> A2: When two user processes both need a new frame at the same time,
 >> how are races avoided?
 
-- When a process goes to do a Page In, then the Page->Frame is locked to prevent other pages from being able to 
-call for a Frame. Then, that Frame is loaded into the Page Table and, upon success, the Page->Frame->Lock is 
-released and allowed to go onto the next Page.
+We avoid race conditions through the use of a lock.  When a process enters page_in it waits for a lock, if it's
+avaliable it immediately runs through and is allocated a new frame.  If another process arives while this is 
+going on, it must wait for that process to return and release the lock.
 
 		       PAGING TO AND FROM DISK
 		       =======================
@@ -68,6 +68,8 @@ released and allowed to go onto the next Page.
 >> B2: Explain your heuristic for deciding whether a page fault for an
 >> invalid virtual address should cause the stack to be extended into
 >> the page that faulted.
+
+
 
 			 MEMORY MAPPED FILES
 			 ===================
