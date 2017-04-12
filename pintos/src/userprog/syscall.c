@@ -468,7 +468,7 @@ sys_close (int handle)
   free (fd);
   return 0;
 }
-
+
 /* Binds a mapping id to a region of memory and a file. */
 struct mapping
   {
@@ -504,7 +504,14 @@ lookup_mapping (int handle)
 static void
 unmap (struct mapping *m) 
 {
-/* add code here */
+  while((m->page_cnt-1) > 0)
+  {
+    page_deallocate(m->base + PGSIZE * m->page_cnt);
+    m->page_cnt--; 
+  }
+ 
+  list_remove(&m->elem);
+  free(m);
 }
  
 /* Mmap system call. */
@@ -560,8 +567,7 @@ sys_mmap (int handle, void *addr)
 static int
 sys_munmap (int mapping) 
 {
-/* add code here */
-
+  unmap(lookup_mapping(mapping));
   return 0;
 }
  
