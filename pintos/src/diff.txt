@@ -20,20 +20,20 @@ Pintos3/PintosProject3/pintos/src/userprog/syscall.c
 >   unmap(m);
 
 Pintos3/PintosProject3/pintos/src/vm/page.ct_3/pintos/src/vm/page.c
-14a15,16
-> #define PUSHA_SIZE 32
-> 
-
-54,56c56,60
-< 
-< /* add code */
-< 
----
->       struct thread* cur_thread = thread_current();
->       if (address >= PHYS_BASE - STACK_MAX && address >= cur_thread->user_esp - PUSHA_SIZE)
->       {
->         return page_allocate ((void *) address, false);
->       }
+#14a15,16
+#> #define PUSHA_SIZE 32
+#> 
+#
+#54,56c56,60
+#< 
+#< /* add code */
+#< 
+#---
+#>       struct thread* cur_thread = thread_current();
+#>       if (address >= PHYS_BASE - STACK_MAX && address >= cur_thread->user_esp - PUSHA_SIZE)
+#>       {
+#>         return page_allocate ((void *) address, false);
+#>       }
 
 75c79
 <       swap_in (p); 
