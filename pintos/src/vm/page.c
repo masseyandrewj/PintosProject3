@@ -173,6 +173,10 @@ page_out (struct page *p)
       ok = swap_out(p);  
     }
   }
+  // If it's been removed, we set the page's frame value to NULL since it no longer has a frame.
+  if(ok) {
+    p->frame = NULL
+  }
   /* End Proj3 */
   return ok;
 }
