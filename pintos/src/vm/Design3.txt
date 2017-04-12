@@ -77,7 +77,7 @@ was greater than or equal to the current thread's esp value minus the size of PU
 Next, we check if the address is greater than the size of the stack (PHYS_BASE - STACK_MAX). If
 both of these are true, then new space is allocated for the page via page_allocate().
 
-			 MEMORY MAPPED FILES
+ MEMORY MAPPED FILES
 			 ===================
 
 ---- DATA STRUCTURES ----
@@ -86,14 +86,20 @@ both of these are true, then new space is allocated for the page via page_alloca
 >> `struct' member, global or static variable, `typedef', or
 >> enumeration.  Identify the purpose of each in 25 words or less.
 
+- No new structure members were needed. We just used the default structures and elements given to us.
+
 ---- ALGORITHMS ----
 
 >> C2: Describe how memory mapped files integrate into your virtual
 >> memory subsystem.  Explain how the page fault and eviction
 >> processes differ between swap pages and other pages.
 
+- ???????????????????????????????????
+
 >> C3: Explain how you determine whether a new file mapping overlaps
 >> any existing segment.
+
+- For this, we used the file's Base level and added it to the PGSIZE times the page count.
 
 ---- RATIONALE ----
 
@@ -103,6 +109,8 @@ both of these are true, then new space is allocated for the page via page_alloca
 >> that much of their implementation can be shared.  Explain why your
 >> implementation either does or does not share much of the code for
 >> the two situations.
+
+- Our implementation for mmap shares quite a bit with how you would do the data demand-paged from executables. We reopen the files and gather the information that we need to fulfill the variables that we create in the Mapping structure, such as the ID Handle, the page count, and the File that is opened.
 
 			   SURVEY QUESTIONS
 			   ================
@@ -116,14 +124,12 @@ the quarter.
 >> In your opinion, was this assignment, or any one of the three problems
 >> in it, too easy or too hard?  Did it take too long or too little time?
 
-- I was really confused by all of this. I have tried to make sure that I understand
-everything in the previous projects, but this one just kept throwing me for loops.
-Maybe it was just the lack of sleep/Spring Break that broke me....
+- I was really confused by all of this. I have tried to make sure that I understand everything in the previous projects, but this one just kept throwing me for loops. Maybe it was just the lack of sleep/Spring Break that broke me....
 
 >> Did you find that working on a particular part of the assignment gave
 >> you greater insight into some aspect of OS design?
 
-- ???????????????????
+- Yes, working with the Mapped Memory allowed me to see how a page's space in the stack is deallocated when that page is evicted and no longer needed. This detailed to me how memory allocation works a little better than I understood before.
 
 >> Is there some particular fact or hint we should give students in
 >> future quarters to help them solve the problems?  Conversely, did you
