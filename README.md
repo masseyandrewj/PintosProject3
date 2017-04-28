@@ -27,5 +27,10 @@ both of these are true, then new space is allocated for the page via page_alloca
 
 //////////////////////////////////////////// PAGE SWAPPING ////////////////////////////////////////////////
 
-page.c: 
+page.c: page_out(){}
+
+First we clear the page to prevent race cases when we check the frame to see if it has been modified(dirty). If there is
+no file within the frame then we swap the page out.  If it has not been modified we are good and return success. Otherwise,
+if the page's private value is false then we write to the file and check that the bytes written equal the bytes of the 
+file. If successful, then we set the frame = NULL and return success.
 //////////////////////////////////////////// END OF PAGE SWAPPING ////////////////////////////////////////////////
